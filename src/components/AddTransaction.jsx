@@ -107,7 +107,7 @@ function AddTransaction({ onClose, onAdd }) {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Freelance project"
+              placeholder="e.g. Monthly salary, income from a project, income from rented houses"
               autoComplete="off"
               className="w-full rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3.5 text-sm outline-none transition placeholder:text-white/20 hover:border-white/15 focus:border-emerald-400/50 focus:bg-white/[0.05] focus:ring-4 focus:ring-emerald-400/5"
             />
