@@ -1,0 +1,42 @@
+export const initialTransactions = [
+  {
+    id: 1,
+    name: "Freelance project",
+    category: "Income",
+    amount: 15000,
+    type: "income",
+    date: "2026-10-02",
+  },
+  {
+    id: 2,
+    name: "Monthly groceries",
+    category: "Food & Dining",
+    amount: 4500,
+    type: "expense",
+    date: "2026-10-01",
+  },
+  {
+    id: 3,
+    name: "Internet subscription",
+    category: "Bills",
+    amount: 2500,
+    type: "expense",
+    date: "2026-09-30",
+  },
+  {
+    id: 4,
+    name: "Salary",
+    category: "Income",
+    amount: 60000,
+    type: "income",
+    date: "2026-09-28",
+  },
+  {
+    id: 5,
+    name: "Transport",
+    category: "Transport",
+    amount: 3200,
+    type: "expense",
+    date: "2026-09-27",
+  },
+];
