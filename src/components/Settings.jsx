@@ -25,9 +25,9 @@ function Settings({ transactions, onReset }) {
   };
 
   return (
-    <div className="max-w-4xl">
-      {/* Header */}
-      <section className="mb-8">
+    <div>
+      {/* Page Header */}
+      <section className="mb-7 sm:mb-8">
         <p className="mb-2 text-sm text-emerald-400">
           Application preferences
         </p>
@@ -37,60 +37,60 @@ function Settings({ transactions, onReset }) {
         </h1>
 
         <p className="mt-2 max-w-xl text-sm leading-6 text-white/40">
-          Manage your IncomeFlow data and application preferences.
+          Manage your IncomeFlow preferences and understand how
+          your local data is stored.
         </p>
       </section>
 
       {/* Appearance */}
-      <section className="mb-6 rounded-3xl border border-white/10 bg-[#101514] p-6 sm:p-7">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-white/50">
-            <Moon size={18} />
+      <section className="mb-5 rounded-3xl border border-white/10 bg-[#101514] p-4 shadow-xl shadow-black/5 sm:mb-6 sm:p-7">
+        <SectionHeader
+          icon={<Moon size={17} />}
+          title="Appearance"
+          description="Control how IncomeFlow looks."
+        />
+
+        <div className="flex flex-col gap-4 rounded-2xl border border-white/5 bg-white/[0.025] p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/5 text-white/30">
+              <Moon size={16} />
+            </div>
+
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-white/70">
+                Dark mode
+              </p>
+
+              <p className="mt-1 text-xs leading-5 text-white/25">
+                IncomeFlow currently uses the dark interface.
+              </p>
+            </div>
           </div>
 
-          <div>
-            <h2 className="font-medium">Appearance</h2>
+          <div className="flex w-fit items-center gap-3 pl-12 sm:pl-0">
+            <span className="text-xs text-emerald-400/70">
+              Active
+            </span>
 
-            <p className="mt-1 text-xs text-white/30">
-              Control how IncomeFlow looks.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between rounded-2xl border border-white/5 bg-white/[0.025] p-4">
-          <div>
-            <p className="text-sm text-white/70">
-              Dark mode
-            </p>
-
-            <p className="mt-1 text-xs text-white/30">
-              IncomeFlow currently uses the dark interface.
-            </p>
-          </div>
-
-          <div className="flex h-7 w-12 items-center rounded-full bg-emerald-400 p-1">
-            <div className="ml-auto h-5 w-5 rounded-full bg-[#07100d]" />
+            <div
+              className="flex h-7 w-12 shrink-0 items-center rounded-full bg-emerald-400 p-1"
+              aria-label="Dark mode active"
+            >
+              <div className="ml-auto h-5 w-5 rounded-full bg-[#07100d] shadow-sm" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Data */}
-      <section className="mb-6 rounded-3xl border border-white/10 bg-[#101514] p-6 sm:p-7">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-white/50">
-            <Database size={18} />
-          </div>
+      {/* Your Data */}
+      <section className="mb-5 rounded-3xl border border-white/10 bg-[#101514] p-4 shadow-xl shadow-black/5 sm:mb-6 sm:p-7">
+        <SectionHeader
+          icon={<Database size={17} />}
+          title="Your data"
+          description="Information currently stored in this browser."
+        />
 
-          <div>
-            <h2 className="font-medium">Your data</h2>
-
-            <p className="mt-1 text-xs text-white/30">
-              Information currently stored in this browser.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-2.5 sm:grid-cols-3 sm:gap-3">
           <DataCard
             label="Total records"
             value={transactions.length}
@@ -99,6 +99,7 @@ function Settings({ transactions, onReset }) {
           <DataCard
             label="Income records"
             value={incomeCount}
+            accent
           />
 
           <DataCard
@@ -107,57 +108,61 @@ function Settings({ transactions, onReset }) {
           />
         </div>
 
-        <div className="mt-5 flex items-start gap-3 rounded-2xl border border-emerald-400/10 bg-emerald-400/5 p-4">
-          <ShieldCheck
-            size={18}
-            className="mt-0.5 shrink-0 text-emerald-400"
-          />
+        {/* Storage Notice */}
+        <div className="mt-4 flex items-start gap-3 rounded-2xl border border-emerald-400/10 bg-emerald-400/[0.04] p-4 sm:mt-5">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-400/10 text-emerald-400">
+            <ShieldCheck size={16} />
+          </div>
 
-          <div>
-            <p className="text-sm text-white/65">
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-white/60">
               Local storage
             </p>
 
-            <p className="mt-1 text-xs leading-5 text-white/30">
-              Your transactions are currently stored locally
-              in this browser. No account or server database is
-              required.
+            <p className="mt-1 text-xs leading-5 text-white/25">
+              Your transactions are currently stored locally in
+              this browser. This demo does not require an account
+              or server database.
             </p>
           </div>
         </div>
       </section>
 
       {/* Danger Zone */}
-      <section className="rounded-3xl border border-red-400/10 bg-[#101514] p-6 sm:p-7">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-400/10 text-red-400">
-            <AlertTriangle size={18} />
+      <section className="rounded-3xl border border-red-400/10 bg-[#101514] p-4 shadow-xl shadow-black/5 sm:p-7">
+        <div className="mb-5 flex items-start gap-3 sm:mb-6">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-400/10 text-red-400">
+            <AlertTriangle size={17} />
           </div>
 
-          <div>
-            <h2 className="font-medium">Danger zone</h2>
+          <div className="min-w-0">
+            <h2 className="font-medium text-white/80">
+              Danger zone
+            </h2>
 
-            <p className="mt-1 text-xs text-white/30">
-              Actions here can permanently remove your local data.
+            <p className="mt-1 text-xs leading-5 text-white/25">
+              Actions here can permanently remove your local
+              transaction data.
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col justify-between gap-5 rounded-2xl border border-red-400/10 bg-red-400/[0.03] p-5 sm:flex-row sm:items-center">
-          <div>
-            <p className="text-sm font-medium text-white/70">
+        <div className="flex flex-col gap-4 rounded-2xl border border-red-400/10 bg-red-400/[0.025] p-4 sm:gap-5 sm:p-5 md:flex-row md:items-center md:justify-between">
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-white/65">
               Reset all transactions
             </p>
 
-            <p className="mt-1 max-w-lg text-xs leading-5 text-white/30">
+            <p className="mt-1 max-w-lg text-xs leading-5 text-white/25">
               Delete your current transactions and restore the
-              original demo data.
+              original IncomeFlow demo data.
             </p>
           </div>
 
           <button
+            type="button"
             onClick={() => setShowReset(true)}
-            className="flex shrink-0 items-center justify-center gap-2 rounded-xl border border-red-400/20 px-4 py-2.5 text-sm text-red-400 transition hover:bg-red-400/10"
+            className="flex w-full shrink-0 items-center justify-center gap-2 rounded-xl border border-red-400/15 bg-red-400/[0.03] px-4 py-3 text-sm font-medium text-red-400 transition hover:border-red-400/25 hover:bg-red-400/10 active:scale-[0.99] md:w-fit"
           >
             <RotateCcw size={16} />
             Reset data
@@ -167,32 +172,35 @@ function Settings({ transactions, onReset }) {
 
       {/* Reset Confirmation */}
       {showReset && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#111716] p-6 shadow-2xl sm:p-7">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-400/10 text-red-400">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/70 p-3 backdrop-blur-sm sm:p-4">
+          <div className="my-auto w-full max-w-md rounded-[26px] border border-white/10 bg-[#111716] p-5 shadow-2xl shadow-black/40 sm:rounded-[28px] sm:p-7">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-400/10 text-red-400">
               <Trash2 size={20} />
             </div>
 
-            <h2 className="mt-5 text-xl font-semibold">
+            <h2 className="mt-5 text-xl font-semibold tracking-tight">
               Reset your data?
             </h2>
 
-            <p className="mt-2 text-sm leading-6 text-white/40">
+            <p className="mt-2 text-sm leading-6 text-white/35">
               This will remove all transactions you have added
               and restore the original IncomeFlow demo data.
+              This action cannot be undone.
             </p>
 
-            <div className="mt-7 flex gap-3">
+            <div className="mt-6 flex flex-col-reverse gap-2.5 sm:mt-7 sm:flex-row sm:gap-3">
               <button
+                type="button"
                 onClick={() => setShowReset(false)}
-                className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3 text-sm text-white/60 transition hover:bg-white/10"
+                className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3.5 text-sm font-medium text-white/50 transition hover:bg-white/10 hover:text-white/70 active:scale-[0.99]"
               >
                 Cancel
               </button>
 
               <button
+                type="button"
                 onClick={handleReset}
-                className="flex-1 rounded-xl bg-red-400 py-3 text-sm font-semibold text-[#180706] transition hover:bg-red-300"
+                className="flex-1 rounded-xl bg-red-400 py-3.5 text-sm font-semibold text-[#180706] transition hover:bg-red-300 active:scale-[0.99]"
               >
                 Reset data
               </button>
@@ -204,14 +212,48 @@ function Settings({ transactions, onReset }) {
   );
 }
 
-function DataCard({ label, value }) {
+function SectionHeader({
+  icon,
+  title,
+  description,
+}) {
   return (
-    <div className="rounded-2xl border border-white/5 bg-white/[0.025] p-4">
-      <p className="text-xs text-white/30">
-        {label}
-      </p>
+    <div className="mb-5 flex items-start gap-3 sm:mb-6">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/5 bg-white/[0.035] text-white/40">
+        {icon}
+      </div>
 
-      <p className="mt-2 text-xl font-semibold">
+      <div className="min-w-0">
+        <h2 className="font-medium text-white/80">
+          {title}
+        </h2>
+
+        <p className="mt-1 text-xs leading-5 text-white/25">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function DataCard({ label, value, accent }) {
+  return (
+    <div className="rounded-2xl border border-white/5 bg-white/[0.025] p-4 transition hover:border-white/10 hover:bg-white/[0.04]">
+      <div className="flex items-center justify-between gap-2">
+        <p className="truncate text-xs text-white/25">
+          {label}
+        </p>
+
+        {accent && (
+          <div className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400/70" />
+        )}
+      </div>
+
+      <p
+        className={`mt-2 text-2xl font-semibold ${
+          accent ? "text-emerald-400" : "text-white/80"
+        }`}
+      >
         {value}
       </p>
     </div>

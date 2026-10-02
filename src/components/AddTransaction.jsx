@@ -39,32 +39,34 @@ function AddTransaction({ onClose, onAdd }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-lg rounded-3xl border border-white/10 bg-[#111716] p-6 shadow-2xl sm:p-8">
-        <div className="mb-7 flex items-start justify-between">
-          <div>
-            <h2 className="text-xl font-semibold">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/70 p-3 backdrop-blur-sm sm:p-4">
+      <div className="my-auto w-full max-w-lg rounded-[26px] border border-white/10 bg-[#111716] p-5 shadow-2xl shadow-black/40 sm:rounded-3xl sm:p-8">
+        {/* Header */}
+        <div className="mb-6 flex items-start justify-between gap-4 sm:mb-7">
+          <div className="min-w-0">
+            <h2 className="text-xl font-semibold tracking-tight">
               Add transaction
             </h2>
 
-            <p className="mt-1 text-sm text-white/35">
+            <p className="mt-1 max-w-sm text-sm leading-5 text-white/35">
               Record money coming in or going out.
             </p>
           </div>
 
           <button
+            type="button"
             onClick={onClose}
-            className="rounded-xl p-2 text-white/40 transition hover:bg-white/5 hover:text-white"
+            className="shrink-0 rounded-xl p-2 text-white/40 transition hover:bg-white/5 hover:text-white active:scale-[0.97]"
             aria-label="Close"
           >
             <X size={20} />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
           {/* Transaction Type */}
           <div>
-            <label className="mb-2 block text-xs text-white/40">
+            <label className="mb-2 block text-xs font-medium text-white/40">
               Transaction type
             </label>
 
@@ -72,10 +74,10 @@ function AddTransaction({ onClose, onAdd }) {
               <button
                 type="button"
                 onClick={() => setType("expense")}
-                className={`rounded-lg py-2.5 text-sm transition ${
+                className={`rounded-lg py-3 text-sm font-medium transition active:scale-[0.99] ${
                   type === "expense"
                     ? "bg-white/10 text-white"
-                    : "text-white/35"
+                    : "text-white/35 hover:text-white/60"
                 }`}
               >
                 Expense
@@ -84,10 +86,10 @@ function AddTransaction({ onClose, onAdd }) {
               <button
                 type="button"
                 onClick={() => setType("income")}
-                className={`rounded-lg py-2.5 text-sm transition ${
+                className={`rounded-lg py-3 text-sm font-medium transition active:scale-[0.99] ${
                   type === "income"
                     ? "bg-emerald-400 text-[#07100d]"
-                    : "text-white/35"
+                    : "text-white/35 hover:text-white/60"
                 }`}
               >
                 Income
@@ -97,7 +99,7 @@ function AddTransaction({ onClose, onAdd }) {
 
           {/* Description */}
           <div>
-            <label className="mb-2 block text-xs text-white/40">
+            <label className="mb-2 block text-xs font-medium text-white/40">
               Description
             </label>
 
@@ -106,28 +108,30 @@ function AddTransaction({ onClose, onAdd }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Freelance project"
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none transition placeholder:text-white/20 focus:border-emerald-400/50"
+              autoComplete="off"
+              className="w-full rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3.5 text-sm outline-none transition placeholder:text-white/20 hover:border-white/15 focus:border-emerald-400/50 focus:bg-white/[0.05] focus:ring-4 focus:ring-emerald-400/5"
             />
           </div>
 
           {/* Amount */}
           <div>
-            <label className="mb-2 block text-xs text-white/40">
+            <label className="mb-2 block text-xs font-medium text-white/40">
               Amount
             </label>
 
-            <div className="flex overflow-hidden rounded-xl border border-white/10 bg-white/5 focus-within:border-emerald-400/50">
-              <span className="flex items-center border-r border-white/10 px-4 text-sm text-emerald-400">
+            <div className="flex overflow-hidden rounded-xl border border-white/10 bg-white/[0.035] transition focus-within:border-emerald-400/50 focus-within:ring-4 focus-within:ring-emerald-400/5">
+              <span className="flex shrink-0 items-center border-r border-white/10 px-4 text-sm font-medium text-emerald-400">
                 KSh
               </span>
 
               <input
                 type="number"
                 min="1"
+                inputMode="decimal"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="0"
-                className="w-full bg-transparent px-4 py-3 text-sm outline-none placeholder:text-white/20"
+                className="min-w-0 w-full bg-transparent px-4 py-3.5 text-sm outline-none placeholder:text-white/20"
               />
             </div>
           </div>
@@ -135,14 +139,14 @@ function AddTransaction({ onClose, onAdd }) {
           {/* Category */}
           {type === "expense" && (
             <div>
-              <label className="mb-2 block text-xs text-white/40">
+              <label className="mb-2 block text-xs font-medium text-white/40">
                 Category
               </label>
 
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-[#171d1b] px-4 py-3 text-sm text-white outline-none focus:border-emerald-400/50"
+                className="w-full rounded-xl border border-white/10 bg-[#171d1b] px-4 py-3.5 text-sm text-white outline-none transition focus:border-emerald-400/50 focus:ring-4 focus:ring-emerald-400/5"
               >
                 <option>Food & Dining</option>
                 <option>Transport</option>
@@ -158,7 +162,7 @@ function AddTransaction({ onClose, onAdd }) {
 
           {/* Date */}
           <div>
-            <label className="mb-2 block text-xs text-white/40">
+            <label className="mb-2 block text-xs font-medium text-white/40">
               Date
             </label>
 
@@ -166,23 +170,23 @@ function AddTransaction({ onClose, onAdd }) {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:border-emerald-400/50"
+              className="w-full rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3.5 text-sm text-white outline-none transition focus:border-emerald-400/50 focus:bg-white/[0.05] focus:ring-4 focus:ring-emerald-400/5"
             />
           </div>
 
           {/* Actions */}
-          <div className="flex gap-3 pt-3">
+          <div className="flex gap-2.5 pt-2 sm:gap-3 sm:pt-3">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3 text-sm text-white/60 transition hover:bg-white/10"
+              className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3.5 text-sm font-medium text-white/55 transition hover:bg-white/10 hover:text-white/70 active:scale-[0.99]"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="flex-1 rounded-xl bg-emerald-400 py-3 text-sm font-semibold text-[#07100d] transition hover:bg-emerald-300"
+              className="flex-1 rounded-xl bg-emerald-400 py-3.5 text-sm font-semibold text-[#07100d] shadow-lg shadow-emerald-400/5 transition hover:bg-emerald-300 active:scale-[0.99]"
             >
               Add transaction
             </button>
